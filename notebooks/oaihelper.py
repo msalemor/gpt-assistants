@@ -24,17 +24,21 @@ def get_openai_client() -> AzureOpenAI:
 
 def create_assistant(client: AzureOpenAI, name: str, instructions: str, tools, model: str):
     if tools is None:
-        return client.beta.assistants.create(
+        assistant = client.beta.assistants.create(
             name=name,
             instructions=instructions,
             model=model,
         )
-    return client.beta.assistants.create(
+        __assistants.append(assistant)
+        return assistant
+    assistant = client.beta.assistants.create(
         name=name,
         instructions=instructions,
         tools=tools,
         model=model,
     )
+    __assistants.append(assistant)
+    return assistant
 
 
 def check_if_assistant_exists(assistant_id):
@@ -88,6 +92,7 @@ def generate_response(client, assistant, message_body, wa_id, name):
         print(f"Creating new thread for {name} with wa_id {wa_id}")
         thread = client.beta.threads.create()
         store_thread(wa_id, thread.id)
+        __threads.append(thread)
         thread_id = thread.id
 
     # Otherwise, retrieve the existing thread
@@ -106,3 +111,14 @@ def generate_response(client, assistant, message_body, wa_id, name):
     new_message = __run_assistant(client, assistant, thread)
     print(f"To {name}:", new_message)
     return new_message
+
+
+__assistants = []
+__threads = []
+
+
+def cleanup(client):
+    for assistant in __assistants:
+        print(client.beta.assistants.delete(assistant.id))
+    for thread in __threads:
+        print(client.beta.thread.delete(thread.id))
