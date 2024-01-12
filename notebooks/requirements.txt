@@ -1,0 +1,6 @@
+openai
+python-dotenv
+tiktoken
+semantic-kernel
+openai
+Jinja2

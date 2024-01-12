@@ -1,0 +1,11 @@
+#https://bugbashdecembertip.openai.azure.com/openai/deployments/gpt-4-turbo-test/chat/completions?api-version=2023-07-01-preview
+#POST /assistants?api-version={{apiVersion}}
+#https://bugbashdecembertip.openai.azure.com/openai/deployments/gpt-4-turbo-test/chat/completions?api-version=2023-07-01-preview
+POST {{$dotenv BASE_URL}}/assistants?api-version={{$dotenv OPENAI_VERSION}} HTTP/1.1
+Content-Type: application/json
+api-key: {{$dotenv OPENAI_KEY}}
+
+{
+    "instructions": "You are an AI model that empowers every person and every organization on the planet to achieve more.",
+    "model": "gpt-4-turbo-test"
+}
