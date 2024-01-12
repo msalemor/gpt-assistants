@@ -23,13 +23,18 @@ def get_openai_client() -> AzureOpenAI:
 
 
 def create_assistant(client: AzureOpenAI, name: str, instructions: str, tools, model: str):
-    assistant = client.beta.assistants.create(
+    if tools is None:
+        return client.beta.assistants.create(
+            name=name,
+            instructions=instructions,
+            model=model,
+        )
+    return client.beta.assistants.create(
         name=name,
         instructions=instructions,
         tools=tools,
         model=model,
     )
-    return assistant
 
 
 def check_if_assistant_exists(assistant_id):
