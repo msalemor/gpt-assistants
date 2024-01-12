@@ -13,18 +13,18 @@ load_dotenv()
 api_URI = os.getenv("OPENAI_URI")
 api_KEY = os.getenv("OPENAI_KEY")
 api_version = os.getenv("OPENAI_VERSION")
-gpt_api_deployment = os.getenv("OPENAI_GPT_DEPLOYMENT")
-ada_api_deployment = os.getenv("OPENAI_ADA_DEPLOYMENT")
+gpt_deployment_name = os.getenv("OPENAI_GPT_DEPLOYMENT")
+ada_deployment_name = os.getenv("OPENAI_ADA_DEPLOYMENT")
 
 
 def get_kernel() -> sk.Kernel:
     kernel = sk.Kernel()
 
     kernel.add_chat_service(
-        "gpt", AzureChatCompletion(gpt_api_deployment, api_URI, api_KEY))
+        "gpt", AzureChatCompletion(gpt_deployment_name, api_URI, api_KEY))
 
     kernel.add_text_embedding_generation_service(
-        "ada", AzureTextEmbedding(ada_api_deployment, api_URI, api_KEY))
+        "ada", AzureTextEmbedding(ada_deployment_name, api_URI, api_KEY))
 
     kernel.register_memory_store(memory_store=sk.memory.VolatileMemoryStore())
     kernel.import_skill(sk.core_skills.TextMemorySkill())
@@ -62,7 +62,7 @@ def get_openai_client() -> AzureOpenAI:
 def get_model() -> AzureChatOpenAI:
     return AzureChatOpenAI(
         openai_api_version=api_version,
-        azure_deployment=gpt_api_deployment,
+        azure_deployment=gpt_deployment_name,
         openai_api_key=api_KEY,
         openai_api_base=api_URI,
     )
