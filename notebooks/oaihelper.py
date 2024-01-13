@@ -1,6 +1,8 @@
 import shelve
 import time
 import os
+import datetime
+import pytz
 
 from typing import List
 from openai import AsyncAzureOpenAI, AzureOpenAI
@@ -164,3 +166,8 @@ def cleanup(client):
     print("Deleting: ", len(ai_threads), " threads.")
     for thread in ai_threads:
         print(client.beta.threads.delete(thread.id))
+
+
+def get_localized_datetime(timezone='America/New_York'):
+    now = datetime.datetime.now(pytz.timezone(timezone))
+    return now.isoformat()

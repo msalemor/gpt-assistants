@@ -1,4 +1,6 @@
 import os
+import datetime
+import pytz
 import semantic_kernel as sk
 from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion, AzureTextEmbedding
 from dotenv import load_dotenv
@@ -112,3 +114,8 @@ def format_output(source, line_length=80) -> str:
     for line in lines:
         out += line + "\n"
     return out
+
+
+def get_localized_datetime(timezone='America/New_York'):
+    now = datetime.datetime.now(pytz.timezone(timezone))
+    return now.isoformat()
