@@ -21,6 +21,7 @@ api_KEY = os.getenv("OPENAI_KEY")
 api_version = os.getenv("OPENAI_VERSION")
 gpt_deployment_name = os.getenv("OPENAI_GPT_DEPLOYMENT")
 ada_deployment_name = os.getenv("OPENAI_ADA_DEPLOYMENT")
+email_URI = os.getenv("EMAIL_URI")
 
 
 def clear_shelves():

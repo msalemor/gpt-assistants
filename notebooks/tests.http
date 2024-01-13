@@ -12,3 +12,14 @@ api-key: {{$dotenv OPENAI_KEY}}
 GET {{$dotenv BASE_URL}}/threads?api-version={{$dotenv OPENAI_VERSION}} HTTP/1.1
 Content-Type: application/json
 api-key: {{$dotenv OPENAI_KEY}}
+
+
+###
+
+POST {{$dotenv EMAIL_URI}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "to":"alemor@microsoft.com; vsantana@microsoft.com; Andres.Padilla@microsoft.com",
+    "content":"This is a test email from the Email Assistant API."
+}
