@@ -6,3 +6,9 @@ api-key: {{$dotenv OPENAI_KEY}}
     "instructions": "You are an AI model that empowers every person and every organization on the planet to achieve more.",
     "model": "gpt-4-turbo-test"
 }
+
+###
+
+GET {{$dotenv BASE_URL}}/threads?api-version={{$dotenv OPENAI_VERSION}} HTTP/1.1
+Content-Type: application/json
+api-key: {{$dotenv OPENAI_KEY}}
