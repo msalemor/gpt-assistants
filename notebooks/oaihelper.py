@@ -159,6 +159,12 @@ def __add_thread(thread):
     print("Added thread: ", thread.id, len(ai_threads))
 
 
+def upload_file(client, path):
+    # Upload a file with an "assistants" purpose
+    file = client.files.create(file=open(path, "rb"), purpose="assistants")
+    return file
+
+
 def cleanup(client):
     print("Deleting: ", len(ai_assistants), " assistants.")
     for assistant in ai_assistants:
