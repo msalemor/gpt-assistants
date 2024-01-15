@@ -34,18 +34,15 @@ def clear_shelves():
         threads_shelf.clear()
 
 
-def get_async_openai_client() -> AsyncAzureOpenAI:
-    return AsyncAzureOpenAI(
-        api_key=api_KEY,
-        api_version=api_version,
-        azure_endpoint=api_URI)
+# TODO: Consider removing this
+def get_async_openai_client(**kwargs) -> AsyncAzureOpenAI:
+    return AsyncAzureOpenAI(**kwargs)
+
+# TODO: Consider removing this
 
 
-def get_openai_client() -> AzureOpenAI:
-    return AzureOpenAI(
-        api_key=api_KEY,
-        api_version=api_version,
-        azure_endpoint=api_URI)
+def get_openai_client(**kwargs) -> AzureOpenAI:
+    return AzureOpenAI(**kwargs)
 
 
 def create_assistant(client, **kwargs):
