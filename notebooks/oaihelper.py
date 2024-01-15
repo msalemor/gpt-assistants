@@ -4,7 +4,6 @@ import os
 import datetime
 import pytz
 
-from typing import List
 from openai import AsyncAzureOpenAI, AzureOpenAI
 from dotenv import load_dotenv
 
@@ -14,6 +13,8 @@ from dotenv import load_dotenv
 ai_assistants = []
 # List of threads created
 ai_threads = []
+# List of files uploaded
+ai_files = []
 
 
 load_dotenv()
@@ -159,6 +160,14 @@ def __add_thread(thread):
     print("Added thread: ", thread.id, len(ai_threads))
 
 
+def __add_file(file):
+    for item in ai_files:
+        if item.id == file.id:
+            return
+    ai_files.append(file)
+    print("Added thread: ", thread.id, len(ai_threads))
+
+
 def upload_file(client, path):
     # Upload a file with an "assistants" purpose
     file = client.files.create(file=open(path, "rb"), purpose="assistants")
@@ -172,6 +181,9 @@ def cleanup(client):
     print("Deleting: ", len(ai_threads), " threads.")
     for thread in ai_threads:
         print(client.beta.threads.delete(thread.id))
+    print("Deleting: ", len(ai_files), " files.")
+    for file in ai_files:
+        print(client.files.delete(file.id))
 
 
 def get_localized_datetime(timezone='America/New_York'):
