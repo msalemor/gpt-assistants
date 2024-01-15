@@ -23,3 +23,33 @@ Content-Type: application/json
     "to":"alemor@microsoft.com; vsantana@microsoft.com; Andres.Padilla@microsoft.com",
     "content":"This is a test email from the Email Assistant API."
 }
+
+###
+
+POST {{$dotenv CALENDAR_EMAIL_URI}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "type":"email",
+    "email": {
+        "to":"alemor@microsoft.com",
+        "emailSubject":"Test Email",
+        "emailContent":"This is a test email from the Email Assistant API."
+    }
+}
+
+###
+
+POST {{$dotenv CALENDAR_EMAIL_URI}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "type":"event",
+    "email": {        
+        "eventSubject":"Test Invite",
+        "startTime": "2024-16-01T12:00:00",
+        "endTime": "2024-16-01T12:30:00",
+        "eventAttendees": "andredewes@microsoft.com",
+        "eventContent":"This is a test email from the Email Assistant API."
+    }
+}
