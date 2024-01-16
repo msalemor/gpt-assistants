@@ -73,7 +73,7 @@ def store_thread(user_id, thread):
         threads_shelf[user_id] = thread.id
 
 
-def __run_assistant(client, assistant, thread):
+def __run_assistant(client, assistant, thread, function_calling_fuc: None):
     # Run the assistant
     run = client.beta.threads.runs.create(
         thread_id=thread.id,
@@ -90,14 +90,18 @@ def __run_assistant(client, assistant, thread):
             thread_id=thread.id, run_id=run.id)
 
     if run.status == "failed" or run.status == "cancelled":
-        print("Run failed or cancelled")
-        return None
+        if function_calling_fuc is not None:
+            function_calling_fuc(client, run)
+        else:
+            print("Run failed or cancelled")
+            return None
 
     if run.status == "expired":
         print("Run expired")
         return None
 
     if run.status == "requires_action":
+
         print("This a function assistant that requires action")
         return None
 
@@ -108,7 +112,7 @@ def __run_assistant(client, assistant, thread):
     return new_message
 
 
-def generate_response(client, assistant, message_body, user_id, name):
+def generate_response(client, assistant, message_body, user_id, name, function_calling_fuc: None):
 
     # Check if there is already a thread_id for the user_id
     thread_id = check_if_thread_exists(user_id)
@@ -133,7 +137,8 @@ def generate_response(client, assistant, message_body, user_id, name):
     )
 
     # Run the assistant and get the new message
-    new_message = __run_assistant(client, assistant, thread)
+    new_message = __run_assistant(
+        client, assistant, thread, function_calling_fuc)
     if new_message is None:
         print("Run failed, cancelling thread")
         return None
@@ -170,6 +175,10 @@ def upload_file(client, path):
     # Upload a file with an "assistants" purpose
     file = client.files.create(file=open(path, "rb"), purpose="assistants")
     return file
+
+
+def get_counts():
+    return len(ai_assistants), len(ai_threads), len(ai_files)
 
 
 def cleanup(client):
