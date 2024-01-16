@@ -173,6 +173,7 @@ def __add_file(file):
 def upload_file(client, path):
     # Upload a file with an "assistants" purpose
     file = client.files.create(file=open(path, "rb"), purpose="assistants")
+    __add_file(file)
     return file
 
 

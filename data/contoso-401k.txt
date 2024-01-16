@@ -1,7 +1,7 @@
 401K Policy
 Contoso
 
-A 401k plan is a retirement savings plan that allows you to contribute a portion of your pre-tax income to a designated account. The company offers a 401k plan to all eligible employees as part of its benefits package. The company also matches your contributions up to a certain percentage, depending on your years of service and salary level. This means that the company will add money to your 401k account for every dollar you contribute, up to the matching limit.
+A 401k plan is a retirement savings plan that allows you to contribute a portion of your pre-tax income to a designated account. The company offers a 401k plan to all eligible employees as part of its benefits package. The company also matches your contributions up to 10% percentage, depending on your years of service and salary level. This means that the company will add money to your 401k account for every dollar you contribute, up to the matching limit.
 
 The 401k plan is administered by a third-party provider, who is responsible for investing your contributions and providing you with online access to your account. You can choose from a variety of investment options, ranging from conservative to aggressive, depending on your risk tolerance and retirement goals. You can also change your contribution amount and investment allocation at any time, subject to certain restrictions and fees.
 
