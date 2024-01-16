@@ -83,26 +83,25 @@ def __run_assistant(client, assistant, thread, function_calling_fuc: None):
     # Wait for completion
     # not (run.status == "completed" or run.status or "failed" or run.status or "requires_action" or run.status or "expired" or run.status and "cancelled"):
     # or run.status != "failed" or run.status != "requires_action" or run.status != "expired" or run.status != "cancelled":
-    while not (run.status == "completed" or run.status == "expired" or run.status == "cancelled" or run.status == "requires_action" or run.status == "failed"):
+    while not (run.status == "completed" or run.status == "expired" or run.status == "cancelled" or run.status == "failed"):
         # Be nice to the API
-        time.sleep(0.5)
+        time.sleep(2)
         run = client.beta.threads.runs.retrieve(
             thread_id=thread.id, run_id=run.id)
 
+        if run.status == "requires_action":
+            if function_calling_fuc is not None:
+                function_calling_fuc(client, thread, run)
+            else:
+                print("This a function assistant that requires action")
+                return None
+
     if run.status == "failed" or run.status == "cancelled":
-        if function_calling_fuc is not None:
-            function_calling_fuc(client, run)
-        else:
-            print("Run failed or cancelled")
-            return None
+        print("Run failed or cancelled")
+        return None
 
     if run.status == "expired":
         print("Run expired")
-        return None
-
-    if run.status == "requires_action":
-
-        print("This a function assistant that requires action")
         return None
 
     # Retrieve the Messages
@@ -168,7 +167,7 @@ def __add_file(file):
         if item.id == file.id:
             return
     ai_files.append(file)
-    print("Added thread: ", thread.id, len(ai_threads))
+    print("Added file: ", file.id, len(ai_files))
 
 
 def upload_file(client, path):
