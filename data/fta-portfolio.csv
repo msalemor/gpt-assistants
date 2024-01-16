@@ -1,4 +1,4 @@
-Ticker,QTY,Purchase,Cost
+Ticker,Purchase,QTY,Cost
 AAPL,250,10,2500
 MSFT,100,200,20000
 GOOGL,75,1200,90000
