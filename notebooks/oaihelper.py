@@ -75,6 +75,7 @@ def store_thread(user_id, thread):
 
 def __run_assistant(client, assistant, thread, function_calling_fuc=None):
     # Run the assistant
+    # TODO: Add instructions to the thread
     run = client.beta.threads.runs.create(
         thread_id=thread.id,
         assistant_id=assistant.id,
@@ -132,7 +133,7 @@ def generate_response(client, assistant, message_body, user_id, name, function_c
     message = client.beta.threads.messages.create(
         thread_id=thread_id,
         role="user",
-        content=message_body,
+        content=f"Today is: {get_localized_datetime()}\n\n{message_body}",
     )
 
     # Run the assistant and get the new message
