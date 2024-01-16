@@ -199,6 +199,11 @@ def get_localized_datetime(timezone='America/New_York'):
     return now.isoformat()
 
 
+def get_localized_datetime_str(timezone='America/New_York'):
+    now = datetime.datetime.now(pytz.timezone(timezone))
+    return str(now)
+
+
 def send_email(json_payload):
     headers = {'Content-Type': 'application/json'}
     response = requests.post(email_URI, json=json_payload, headers=headers)
