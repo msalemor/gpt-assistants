@@ -3,6 +3,7 @@ import time
 import os
 import datetime
 import pytz
+import requests
 
 from openai import AsyncAzureOpenAI, AzureOpenAI
 from dotenv import load_dotenv
@@ -186,3 +187,10 @@ def cleanup(client):
 def get_localized_datetime(timezone='America/New_York'):
     now = datetime.datetime.now(pytz.timezone(timezone))
     return now.isoformat()
+
+
+def send_email(json_payload):
+    headers = {'Content-Type': 'application/json'}
+    response = requests.post(email_URI, json=json_payload, headers=headers)
+    if response.status_code == 202:
+        print("Email sent to: " + json_payload['to'])
