@@ -73,7 +73,7 @@ def store_thread(user_id, thread):
         threads_shelf[user_id] = thread.id
 
 
-def __run_assistant(client, assistant, thread, function_calling_fuc: None):
+def __run_assistant(client, assistant, thread, function_calling_fuc=None):
     # Run the assistant
     run = client.beta.threads.runs.create(
         thread_id=thread.id,
@@ -111,7 +111,7 @@ def __run_assistant(client, assistant, thread, function_calling_fuc: None):
     return new_message
 
 
-def generate_response(client, assistant, message_body, user_id, name, function_calling_fuc: None):
+def generate_response(client, assistant, message_body, user_id, name, function_calling_fuc=None):
 
     # Check if there is already a thread_id for the user_id
     thread_id = check_if_thread_exists(user_id)
