@@ -26,6 +26,7 @@ api_version = os.getenv("OPENAI_VERSION")
 gpt_deployment_name = os.getenv("OPENAI_GPT_DEPLOYMENT")
 ada_deployment_name = os.getenv("OPENAI_ADA_DEPLOYMENT")
 email_URI = os.getenv("EMAIL_URI")
+event_URI = os.getenv("CALENDAR_EMAIL_URI")
 
 
 def clear_shelves():
@@ -133,7 +134,7 @@ def generate_response(client, assistant, message_body, user_id, name, function_c
     message = client.beta.threads.messages.create(
         thread_id=thread_id,
         role="user",
-        content=f"Today is: {get_localized_datetime()}\n\n{message_body}",
+        content=f"Today is: {get_formatted_datetime()}\n\n{message_body}",
     )
 
     # Run the assistant and get the new message
@@ -199,9 +200,8 @@ def get_localized_datetime(timezone='America/New_York'):
     return now.isoformat()
 
 
-def get_localized_datetime_str(timezone='America/New_York'):
-    now = datetime.datetime.now(pytz.timezone(timezone))
-    return str(now)
+def get_formatted_datetime():
+    return datetime.datetime.now().strftime("%x %X")
 
 
 def send_email(json_payload):
@@ -209,3 +209,10 @@ def send_email(json_payload):
     response = requests.post(email_URI, json=json_payload, headers=headers)
     if response.status_code == 202:
         print("Email sent to: " + json_payload['to'])
+
+
+def send_event(json_payload):
+    headers = {'Content-Type': 'application/json'}
+    response = requests.post(event_URI, json=json_payload, headers=headers)
+    if response.status_code == 202:
+        print("Event processed")

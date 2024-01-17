@@ -45,11 +45,11 @@ Content-Type: application/json
 
 {
     "type":"event",
-    "email": {        
+    "event": {        
         "eventSubject":"Test Invite",
-        "startTime": "2024-16-01T12:00:00",
-        "endTime": "2024-16-01T12:30:00",
-        "eventAttendees": "andredewes@microsoft.com",
-        "eventContent":"This is a test email from the Email Assistant API."
+        "eventContent":"This is a test email from the Email Assistant API.",
+        "startTime": "01/17/2024 17:00:00",
+        "endTime": "01/17/2024 17:30:00",
+        "isAllDay": false
     }
 }
