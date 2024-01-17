@@ -1,3 +1,4 @@
+Flight Itinerary:
 Flight 1: Departure: Miami International Airport (MIA) Destination: Frankfurt Airport (FRA) Airline: Lufthansa (LH) Flight Number: LH 463 Departure Time: September 28, 2024, 10:00 AM Arrival Time: September 29, 2024, 6:00 AM
 
 Flight 2: Departure: Frankfurt Airport (FRA) Destination: Munich Airport (MUC) Airline: Lufthansa (LH) Flight Number: LH 205 Departure Time: September 29, 2024, 9:00 AM Arrival Time: September 29, 2024, 10:00 AM

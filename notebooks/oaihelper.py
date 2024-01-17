@@ -4,6 +4,7 @@ import os
 import datetime
 import pytz
 import requests
+from dateutil import parser
 
 from openai import AsyncAzureOpenAI, AzureOpenAI
 from dotenv import load_dotenv
@@ -204,15 +205,30 @@ def get_formatted_datetime():
     return datetime.datetime.now().strftime("%x %X")
 
 
-def send_email(json_payload):
+def send_email(to, content):
+    json_payload = {'to': to, 'content': content}
     headers = {'Content-Type': 'application/json'}
     response = requests.post(email_URI, json=json_payload, headers=headers)
     if response.status_code == 202:
         print("Email sent to: " + json_payload['to'])
 
 
-def send_event(json_payload):
-    headers = {'Content-Type': 'application/json'}
-    response = requests.post(event_URI, json=json_payload, headers=headers)
-    if response.status_code == 202:
-        print("Event processed")
+def send_event(subject, content, start, end, is_all_day=False):
+    start = parser.parse(start)
+    end = parser.parse(end)
+    now = datetime.now()
+    if subject != None and start >= now and end >= now:
+        json_payload = {"type": "event",
+                        "event": {
+                            "eventSubject": "AI Travel Assistant: " + subject,
+                            "eventContent": content,
+                            "startTime": start.strftime('%x %X'),
+                            "endTime": end.strftime('%x %X'),
+                            "isAllDay": is_all_day
+                        }}
+        headers = {'Content-Type': 'application/json'}
+        response = requests.post(event_URI, json=json_payload, headers=headers)
+        if response.status_code == 202:
+            print("Event processed")
+    else:
+        print("Event not processed")
