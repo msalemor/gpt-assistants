@@ -109,9 +109,9 @@ def __run_assistant(client, assistant, thread, function_calling_fuc=None):
 
     # Retrieve the Messages
     messages = client.beta.threads.messages.list(thread_id=thread.id)
-    new_message = messages.data[0].content[0].text.value
-    print(f"Generated message: {new_message}")
-    return new_message
+    # new_message = messages.data[0].content[0].text.value
+    # print(f"Generated message: {new_message}")
+    return messages
 
 
 def generate_response(client, assistant, message_body, user_id, name, function_calling_fuc=None):
@@ -139,14 +139,20 @@ def generate_response(client, assistant, message_body, user_id, name, function_c
     )
 
     # Run the assistant and get the new message
-    new_message = __run_assistant(
+    messages = __run_assistant(
         client, assistant, thread, function_calling_fuc)
-    if new_message is None:
-        print("Run failed, cancelling thread")
-        return None
 
-    print(f"To {name}:", new_message)
-    return new_message
+    last_response = messages.data[0].content[0].text.value
+    format_response(name, message_body, last_response)
+
+    return (message_body, last_response)
+
+    # if new_message is None:
+    #    print("Run failed, cancelling thread")
+    #    return None
+
+    # print(f"To {name}:", new_message)
+    # return new_message
 
 
 def __add_assistant(assistant):
@@ -232,3 +238,7 @@ def send_event(subject, content, start, end, is_all_day=False):
             print("Event processed")
     else:
         print("Event not processed")
+
+
+def format_response(name, question, answer):
+    print(f"User {name}: {question}\nAssistant:\n{answer}\n\n")
