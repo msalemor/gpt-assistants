@@ -1,0 +1,15 @@
+Flight 1: Departure: Miami International Airport (MIA) Destination: Frankfurt Airport (FRA) Airline: Lufthansa (LH) Flight Number: LH 463 Departure Time: September 28, 2024, 10:00 AM Arrival Time: September 29, 2024, 6:00 AM
+
+Flight 2: Departure: Frankfurt Airport (FRA) Destination: Munich Airport (MUC) Airline: Lufthansa (LH) Flight Number: LH 205 Departure Time: September 29, 2024, 9:00 AM Arrival Time: September 29, 2024, 10:00 AM
+
+Oktoberfest: Dates: September 29, 2024 - October 6, 2024 Location: Munich, Germany
+
+Flight 3: Departure: Munich Airport (MUC) Destination: Paris Charles de Gaulle Airport (CDG) Airline: Air France (AF) Flight Number: AF 102 Departure Time: October 6, 2024, 12:00 PM Arrival Time: October 6, 2024, 2:00 PM
+
+Paris Stay: Dates: October 6, 2024 - October 9, 2024 Location: Paris, France
+
+Flight 4: Departure: Paris Charles de Gaulle Airport (CDG) Destination: London Heathrow Airport (LHR) Airline: British Airways (BA) Flight Number: BA 309 Departure Time: October 9, 2024, 3:00 PM Arrival Time: October 9, 2024, 4:00 PM
+
+London Stay: Dates: October 9, 2024 - October 12, 2024 Location: London, United Kingdom
+
+Flight 5: Departure: London Heathrow Airport (LHR) Destination: Miami International Airport (MIA) Airline: American Airlines (AA) Flight Number: AA 100 Departure Time: October 12, 2024, 6:00 PM Arrival Time: October 12, 2024, 11:00 PM
