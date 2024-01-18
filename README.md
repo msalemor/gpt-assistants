@@ -111,6 +111,6 @@ while True:
 |----------------------|--------------------------------------------------|
 | [Assistant-01: Foundational Concepts](notebooks/assistant-01-code_interpreter.ipynb) | Showcases the foundational concepts of Assistants such as threads, messages, runs, and tools. |
 | [Assistant-04: Financial Summary bot](notebooks/assistant-04-function_la_email.ipynb) | Using Code Interpreter and Function calling this bot can summarize a financial news article, extract the ticker symbols from the article, get the latest stock prices and email a report. |
-| [Assistant-06: Portpolio Reporting bot](notebooks/assistant-06-code_function_la_email.ipynb) | Code Interpreter and Function calling. |
+| [Assistant-06: Portpolio Reporting bot](notebooks/assistant-06-code_function_la_email.ipynb) | Using Code Interpreter and Function calling, this bot can get a CSV portfolio file, calculate the latest portfolio value based on the latest stock prices, find the best investor performer and the worst, and email a report to a client. |
 | [Assistant-10: HR bot](notebooks/assistant-10-Travelbot.ipynb) | Using the Retrieval tool, provide files on different HR-related topics, and answer employees' questions about these topics. |
 | [Assistant-11: Travel bot](notebooks/assistant-11-Travelbot.ipynb) | Using Code Interpreter, Function calling, and Retrieval, this bot can answer users' questions from a travel itinerary, split and calculate shared expenses, and block a user's outlook calendar. |
