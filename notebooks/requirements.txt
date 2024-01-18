@@ -5,3 +5,4 @@ semantic-kernel
 openai
 Jinja2
 yfinance
+pywin32

@@ -216,3 +216,57 @@ def send_event(json_payload):
     response = requests.post(event_URI, json=json_payload, headers=headers)
     if response.status_code == 202:
         print("Event processed")
+
+def outlook_is_running():
+    #https://stackoverflow.com/questions/33867432/check-with-python-if-outlook-is-already-open-if-not-open-it
+    try:
+        import win32ui
+        win32ui.FindWindow(None, "Microsoft Outlook")
+        return True
+    except win32ui.error:
+        return False
+
+if not outlook_is_running():
+    import os
+    os.startfile("outlook")
+
+def get_outlook_meetings(days_ago):
+    import win32com.client
+    import datetime
+
+    #https://gist.github.com/jackqt/7b82b4def1c1c5a5ed67
+    namespace = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
+    calendar = namespace.GetDefaultFolder(9)
+    appointments = calendar.Items
+    begin = datetime.date.today()
+    end = begin - datetime.timedelta(days = days_ago)
+    filter = f"[Start] >= '{end.strftime('%m/%d/%Y')}'"
+    filteredItems = appointments.Restrict(filter)
+
+    appointments_list = []
+
+    for appointment in filteredItems:
+
+        if appointment.Duration <= 180 and len(appointment.RequiredAttendees) <= 300 and len(appointment.OptionalAttendees) <= 300:
+            appointment_json = {
+                    'subject': appointment.Subject,
+                    'required_attendees': appointment.RequiredAttendees,
+                    'optional_attendees': appointment.OptionalAttendees,
+                    'start': appointment.Start.Format('%m/%d/%Y %H:%M'),
+                    'duration':appointment.Duration
+                }  
+            appointments_list.append(appointment_json)
+
+    return appointments_list
+
+def show_meeting_window(subject, required_attendees, optional_attendees):
+    import win32com.client
+    oOutlook = win32com.client.Dispatch("Outlook.Application")
+    appt = oOutlook.CreateItem(1)
+    appt.Subject = subject
+    appt.Duration = 60
+    appt.MeetingStatus = 1
+    appt.RequiredAttendees = required_attendees
+    appt.OptionalAttendees = optional_attendees
+    appt.Display()
+    appt.GetInspector.Activate()
