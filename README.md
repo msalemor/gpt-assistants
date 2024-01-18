@@ -109,7 +109,7 @@ while True:
 
 | Topic | Description |
 |----------------------|--------------------------------------------------|
-| [Assistant-01: Foundational Concepts](assistant-01.md) | Showcases the foundational concepts of Assistants such as threads, messages, runs and tools. |
-| [Assistant-02: Financial Summary bot](assistant-02.md) | Using Code Interpreter and Function calling this bot can summarize a finanical news article, extract the ticker symbols from the article, get the latest stock prices and email a report. |
+| [Assistant-01: Foundational Concepts](https://github.com/msalemor/gpt-assistants/blob/main/notebooks/assistant-01-code_interpreter.ipynb) | Showcases the foundational concepts of Assistants such as threads, messages, runs and tools. |
+| [Assistant-04: Financial Summary bot](https://github.com/msalemor/gpt-assistants/blob/main/notebooks/assistant-04-function_la_email.ipynb) | Using Code Interpreter and Function calling this bot can summarize a financial news article, extract the ticker symbols from the article, get the latest stock prices and email a report. |
 | [Assistant-03: Portpolio Reporting bot](assistant-03.md) | Code Interpreter and Function calling. |
 | [Assistant-04: Travel bot](assistant-04.md) | Using Code Interpreter, Function calling and Retrieval, this bot can answer users questions from a travel itinerary, split and calculate shared expenses, and block the outlook calendar. |
