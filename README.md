@@ -105,7 +105,7 @@ while True:
         time.sleep(5)
 ```
 
-## Notebooks
+## Sample Assistants - Jupyter notebooks
 
 | Topic | Description |
 |----------------------|--------------------------------------------------|
